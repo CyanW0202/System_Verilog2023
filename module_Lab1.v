@@ -22,9 +22,9 @@
 
 
 module counter(
-    input x,
-    input clk,
-    output reg [2:0] z
+    logic x,
+    logic clk,
+    logic z
     );
     initial begin
     z = 2'b0;
