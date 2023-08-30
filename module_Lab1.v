@@ -20,41 +20,22 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+module right_shift_once #(parameter Y = 8)(input logic [Y-1] , input logic t, output)
 
-module counter(
-    logic x,
-    logic clk,
-    logic z
+
+module param_right_shifter
+    #(parameter N = 8)
+    (
+    input logic [N-1:0] x,
+    input logic [$clog(N)-1:0] amt, //system verilog math function
+    output logic [N-1:0] z
     );
-    initial begin
-    z = 2'b0;
-    end
-    reg [2:0] pstate = 3'b000;
-    always@(posedge clk)
-    begin
-        case(pstate)
-        3'b000: //A->B(1),A(0)
-        begin
-        pstate <= x?3'b001:3'b000;
-        end
-        3'b001://B->B(1), C(0)
-        begin
-        pstate<= x?3'b011:3'b010;
-        z = 3'b001;
-        end
-        3'b010://C->D(1),A(0)
-        begin
-        pstate<= x?3'b011:3'b000;
-        z = 3'b000;
-        end
-        3'b011://D->B(0),D(1)
-        begin
-        pstate <=x?3'b011:3'b001;
-        z = 3'b101;
-        end
-        default:;
-        endcase
-    end
+    //N-1 bits of input, shift log2(N)bits of times, would output a N-1 bits.
+    logic [N-1:0] s1, s0;
+    
+    
+
+   
 endmodule
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
