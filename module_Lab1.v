@@ -24,49 +24,27 @@ module right_shift_once #(parameter Y = 8)(input logic [Y-1] , input logic t, ou
 
 
 module param_right_shifter
-    #(parameter N = 8)
+    #(parameter N =3)
     (
-    input logic [N-1:0] x,
-    input logic [$clog(N)-1:0] amt, //system verilog math function
-    output logic [N-1:0] z
+        input logic [2**N-1:0] x,
+        input logic [N-1:0] amt, //system verilog math function
+        output logic [2**N-1:0] z
     );
     //N-1 bits of input, shift log2(N)bits of times, would output a N-1 bits.
-    logic [N-1:0] s1, s0;
-    amount[0] = 1;
-    amount>>
-    s1>>
-    x=s1;
-    amount[0] = 0
-    amount>>
-    s1>>
-    x =x
-    amount[0] = 1
-
+    logic [2**N-1:0] s1, s0;
+    //
+     
     
-    z = x;
     
-    assign s1 = x;
-    always
-    begin
-        s1>>
-        amt [?] = 1;
-        s1>>;
-        z = S1;
-        amt[0] = 0
-        s1>>
-        z = s0;
-    end
-    
-
-   
 endmodule
+    
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
 // Engineer: 
 // 
 // Create Date: 05/09/2022 06:00:28 PM
-// Design Name: 
+// Design Name
 // Module Name: counter_testbench
 // Project Name: 
 // Target Devices: 
@@ -82,24 +60,37 @@ endmodule
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module counter_testbench();
-reg clock;
-reg X;
-wire[2:0] zout;
-counter dut(
-.x(X),
-.clk(clock),
-.z(zout)
-);
+module SIM_param_right_shifter(
 
-initial begin
-clock = 0;
-forever #80 clock = ~clock;
-end
+    );
+    
+logic [7:0] num;
+logic [2:0] shift;
+logic [7:0] result;
 
+param_right_shifter #(.N(3)) SUMULATION_RIGHT
+    (
+    .num(num),
+    .shift(shift),
+    .result(result)
+    );
+    
 initial begin
-X = 1;
-#800 X = 0;
-#800 X = 1;
-end
+num = 8'b1101_0010;
+shift = 3'b001;
+#10
+num = 8'b1101_0010;
+shift = 3'b010;
+#10
+num = 8'b1101_0010;
+shift = 3'b011;
+#10
+num = 8'b1101_0010;
+shift = 3'b100;
+#10
+num = 8'b1101_0010;
+shift = 3'b101;
+
+end    
+    
 endmodule
