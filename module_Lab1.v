@@ -32,7 +32,30 @@ module param_right_shifter
     );
     //N-1 bits of input, shift log2(N)bits of times, would output a N-1 bits.
     logic [N-1:0] s1, s0;
+    amount[0] = 1;
+    amount>>
+    s1>>
+    x=s1;
+    amount[0] = 0
+    amount>>
+    s1>>
+    x =x
+    amount[0] = 1
+
     
+    z = x;
+    
+    assign s1 = x;
+    always
+    begin
+        s1>>
+        amt [?] = 1;
+        s1>>;
+        z = S1;
+        amt[0] = 0
+        s1>>
+        z = s0;
+    end
     
 
    
